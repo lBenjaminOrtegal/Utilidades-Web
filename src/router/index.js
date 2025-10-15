@@ -5,7 +5,7 @@ import Notas from "../views/Notas.vue";
 import Tareas from "../views/Tareas.vue";
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('#'),
     routes: [
         {
             path: "/",
