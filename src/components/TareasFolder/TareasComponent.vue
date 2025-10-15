@@ -1,5 +1,7 @@
 <script setup>
     import { useTareasStore } from '../../stores/tareas';
+    import checkmark from '@/assets/checkmark.svg';
+    import trash from '@/assets/trash.svg'; 
 
     const tareasStore = useTareasStore();
 
@@ -17,11 +19,11 @@
 
     <div class="tareas">
         <div v-if="tareasStore.tareas.length > 0" v-for="tarea in tareasStore.tareas" :key="tarea" :class="['tarea', {tareaTerminada: tarea.terminada}, {tareaPendiente: !tarea.terminada}]">
-            <img @click="alternateTarea(tarea)" class="checkIcon" src="C:\Users\b3nj4\OneDrive\Documentos\vueTutorial\malla-curricular-vue\src\assets\checkmark.svg"></img>
+            <img @click="alternateTarea(tarea)" class="checkIcon" :src="checkmark"></img>
             <input class="inputTag" v-model="tarea.tag" type="text" id="tag"></input>
             <input class="inputNombre" v-model="tarea.nombre" type="text" id="nombre"></input>
             <input v-if="tarea.fecha !== ''" class="inputFecha" v-model="tarea.fecha" type="date" id="fecha"></input>
-            <img @click="deleteTarea(tarea)" class="trashIcon" src="C:\Users\b3nj4\OneDrive\Documentos\vueTutorial\malla-curricular-vue\src\assets\trash.svg"></img>
+            <img @click="deleteTarea(tarea)" class="trashIcon" :src="trash"></img>
         </div>
         <p v-else class="bold20px">Aun no agregas tareas por aqui!</p>
     </div>
