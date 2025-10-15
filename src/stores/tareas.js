@@ -29,4 +29,6 @@ export const useTareasStore = defineStore("tareas", () => {
         agregarTarea,
         alternarTarea,
     }
+},{
+    persist: true,
 });
