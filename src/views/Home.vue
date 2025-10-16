@@ -27,87 +27,94 @@ import HeaderComponent from '../components/HeaderComponent.vue';
 </template>
 
 <style scoped>
-.pageContainer {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+  .pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
 
-.mainContent {
-  flex-grow: 1;
-}
+  .mainContent {
+      flex-grow: 1;
+  }
 
-.Hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-  margin: 64px auto;
-  max-width: 900px;
-  padding: 0 16px;
-}
+  .Hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    margin: 64px auto;
+    max-width: 900px;
+    padding: 0 16px;
+  }
 
-.heroText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 12px;
-}
+  .heroText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
 
-.Regular14px {
-  font-size: 14px;
-  color: #7E7F83;
-}
+  .Regular14px {
+    font-size: 14px;
+    color: #7E7F83;
+  }
 
-.Bold40px {
-  font-size: 40px;
-  font-weight: bold;
-  line-height: 1.2;
-  color: #34312D;
-}
+  .Bold40px {
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #34312D;
+  }
 
-.Regular16px {
-  font-size: 16px;
-  color: #34312D;
-}
+  .heroButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+  }
 
-.heroButtons {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-}
+  .heroLink {
+    width: 180px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
 
-.heroLink {
-  width: 180px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
+    background-color: #DED1C0;
+    color: #34312D;
+    border: 1px solid #DED1C0;
+    transition: all 0.2s ease-in-out;
+  }
 
-  background-color: #DED1C0;
-  color: #34312D;
-  border: 1px solid #DED1C0;
-  transition: all 0.2s ease-in-out;
-}
+  .heroLink:hover {
+    background-color: #34312D;
+    color: white;
+    border-color: #34312D;
+    cursor: pointer;
+  }
 
-.heroLink:hover {
-  background-color: #34312D;
-  color: white;
-  border-color: #34312D;
-  cursor: pointer;
-}
+  @media (max-width: 600px) {
+    .Hero {
+      margin: 40px auto;
+      gap: 24px;
+    }
 
-.heroLink.secondary {
-  background-color: transparent;
-  color: #34312D;
-  border: 1px solid #7E7F83;
-}
+    .Bold40px {
+      font-size: 32px;
+    }
 
-.heroLink.secondary:hover {
-  background-color: #7E7F83;
-  color: white;
-  border-color: #7E7F83;
-}
+    .heroButtons {
+      flex-direction: column;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    .heroLink {
+      width: 100%;
+      padding: 14px 16px;
+    }
+  }
 </style>

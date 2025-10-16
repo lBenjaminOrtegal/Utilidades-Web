@@ -16,21 +16,28 @@
 </script>
 
 <template>
-
     <div class="tareas">
         <div v-if="tareasStore.tareas.length > 0" v-for="tarea in tareasStore.tareas" :key="tarea" :class="['tarea', {tareaTerminada: tarea.terminada}, {tareaPendiente: !tarea.terminada}]">
-            <img @click="alternateTarea(tarea)" class="checkIcon" :src="checkmark"></img>
-            <input class="inputTag" v-model="tarea.tag" type="text" id="tag"></input>
-            <input class="inputNombre" v-model="tarea.nombre" type="text" id="nombre"></input>
-            <input v-if="tarea.fecha !== ''" class="inputFecha" v-model="tarea.fecha" type="date" id="fecha"></input>
-            <img @click="deleteTarea(tarea)" class="trashIcon" :src="trash"></img>
+            <div class="tareaContent">
+                <input class="inputTag" v-model="tarea.tag" type="text" id="tag">
+                <input v-model="tarea.nombre" type="text" id="nombre">
+                <input v-if="tarea.fecha !== ''" class="inputFecha" v-model="tarea.fecha" type="date" id="fecha">
+            </div>
+            <div class="iconBar">
+                <button @click="alternateTarea(tarea)" class="checkButton"><img :src="checkmark" alt="Completar"></button>
+                <button @click="deleteTarea(tarea)" class="trashButton"><img :src="trash" alt="Eliminar"></button>
+            </div>
         </div>
         <p v-else class="bold20px">Aun no agregas tareas por aqui!</p>
     </div>
-
 </template>
 
 <style scoped>
+    .tareaContent {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .bold20px {
         font-size: 20px;
         color: #34312D;
@@ -55,12 +62,17 @@
         -webkit-appearance: none;
     }
 
+    .iconBar {
+        display: flex;
+    }
+
     .tarea {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         background-color: #34312D;
-        padding: 8px;
         width: 100%;
+        max-width: 800px;
         border-radius: 8px;
         transition: background-color 0.2s ease, transform 0.2s ease;
         overflow: hidden;
@@ -73,35 +85,38 @@
         transform: translateY(-2px);
     }
 
-    .trashIcon,
-    .checkIcon {
+    .trashButton,
+    .checkButton {
+        border: none;
+        background-color: transparent;
+        padding: 0px 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 24px;
-        height: 24px;
-        padding: 8px;
-        border-radius: 8px;
         cursor: pointer;
         transition: all 0.25s ease;
-        border: #34312D 1px solid;
         flex-shrink: 0;
+        width: 50%;
+        height: 50px;
     }
 
-    .checkIcon {
+    .checkButton {
         background-color: #35A7FF;
     }
 
-    .trashIcon {
+    .trashButton {
         background-color: #FF5964;
-        margin-left: auto;
     }
 
-    .trashIcon:hover,
-    .checkIcon:hover {
+    .checkButton img,
+    .trashButton img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .trashButton:hover,
+    .checkButton:hover {
         background-color: white;
-        color: #34312D;
-        transform: scale(1.1);
     }
 
     .tarea input {
@@ -117,12 +132,8 @@
 
     .inputTag {
         font-weight: bold;
-        width: 100px;
+        width: 200px;
         flex-shrink: 0;
-    }
-
-    .inputFecha {
-        height: 20px;
     }
 
     .tareaTerminada {
@@ -135,30 +146,57 @@
         color: #777 !important;
     }
 
-    .tareaPendiente,
-    .tareaPendiente input {
-        text-decoration: none;
-    }
-
     @media (max-width: 768px) {
+        .tareas {
+            padding: 16px 8px;
+        }
+
         .tarea {
+            flex-wrap: wrap;
+            padding: 0;
+        }
+
+        .tareaContent {
+            display: flex;
             flex-direction: column;
-            align-items: stretch;
+            width: 100%;
+            padding: 8px 0;
+        }
+
+        .tarea input {
+            padding: 10px 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .inputTag {
+            width: 100%;
         }
 
         .checkIcon,
         .trashIcon {
-            width: 100%;
+            width: 50%;
+            height: 30%;
             border-radius: 0;
-            margin-left: 0;
+            padding: 0;
+            border: none;
+            margin: 0;
+        }
+
+        .iconBar {
+            display: flex;
+            width: 100%;
+            margin-top: 8px;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
         }
 
         .trashIcon {
-            border-radius: 8px;
+            border-radius: 0 0 8px 0;
         }
 
         .checkIcon {
-            border-radius: 8px;
+            border-radius: 0 0 0 8px;
         }
     }
 </style>

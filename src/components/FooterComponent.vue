@@ -25,24 +25,12 @@
         flex-shrink: 0;
     }
 
-    .Developer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-
     .myName {
         display: flex;
         flex-direction: column;
         align-items: center;
         color: white;
         font-size: 14px;
-    }
-
-    .myName .boldParagraph {
-        font-weight: bold;
     }
 
     .linkRef {
@@ -56,5 +44,21 @@
 
     .linkRef:hover {
         color: #DED1C0;
+    }
+
+    @media (max-width: 768px) {
+        .Frame1 {
+            height: 70px;
+            padding: 0 20px;
+        }
+        
+        .myName {
+            font-size: 12px; 
+        }
+
+        .linkRef {
+            font-size: 16px; 
+            padding: 10px 0;
+        }
     }
 </style>

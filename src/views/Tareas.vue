@@ -22,15 +22,29 @@ import TareasComponent from '../components/TareasFolder/TareasComponent.vue';
     .container {
         display: flex;
         flex-direction: column;
-        justify-content:baseline;
-        min-height: 89.5vh;
+        justify-content: flex-start;
+        min-height: 100vh;
+        width: 100%;
     }
 
     .tareasContainer {
         display: flex;
-        align-items:start;
-        padding: 32px 0px;
-        justify-content: space-around;
+        flex-grow: 1;
+        align-items: flex-start;
+        padding: 32px 20px;
+        gap: 24px;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 800px) {
+        .tareasContainer {
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 10px;
+            gap: 30px;
+        }
     }
 
 </style>

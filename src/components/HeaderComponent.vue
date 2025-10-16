@@ -56,4 +56,38 @@
     .link:hover {
         color: #DED1C0;
     }
+
+    @media (max-width: 768px) {
+        .headerClass {
+            height: auto;
+            padding: 15px 20px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .headerTitle {
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .Links {
+            width: 100%;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        
+        .navLink {
+            flex-basis: auto; 
+            flex-grow: 1; 
+            text-align: center; 
+        }
+
+        .link {
+            font-size: 16px;
+            padding: 5px 0;
+            display: block;
+        }
+    }
 </style>

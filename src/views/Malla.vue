@@ -24,7 +24,7 @@
                         <h2>Universidad</h2>
                         <p class="Regular14px">Especifica el nombre de tu universidad.</p>
                         <template #Label>
-                            <label for="universidad">Cual es tu universidad?</label>
+                            <label for="universidad"></label>
                             <input v-model="mallaStore.universidad" type="text" id="universidad"></input>
                         </template>
                     </DefinirVariablesComponente>
@@ -32,7 +32,7 @@
                         <h2>Carrera</h2>
                         <p class="Regular14px">Especifica el nombre de la carrera que estudias.</p>
                         <template #Label>
-                            <label for="carrera">Que estudias?</label>
+                            <label for="carrera"></label>
                             <input v-model="mallaStore.nombreCarrera" type="text" id="carrera"></input>
                         </template>
                     </DefinirVariablesComponente>
@@ -52,21 +52,52 @@
 
     .Nombres {
         display: flex;
+        gap: 20px;
     }
 
     .config {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content:flex-start;
+        width: 100%;
+        padding: 20px 0;
     }
+
     .title {
         color: #34312D;
+        margin-bottom: 20px;
     }
+
     .forms {
         display: flex;
         justify-content: center;
         margin: 16px 32px;
         gap: 32px;
+        width: 90%;
+        max-width: 1200px;
+    }
+
+    .Nombres > :deep(.DefinirVariablesComponente) {
+        flex: 1;
+    }
+
+    @media (max-width: 900px) {
+        .forms {
+            flex-direction: column;
+            align-items: center;
+            margin: 16px 10px;
+            gap: 20px;
+        }
+
+        .Nombres {
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 1.8em;
+            text-align: center;
+        }
     }
 </style>

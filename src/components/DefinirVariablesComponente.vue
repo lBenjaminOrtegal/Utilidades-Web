@@ -17,7 +17,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 16px; 
+        gap: 0px; 
         border-radius: 16px;
         padding: 16px;
         margin: 32px auto; 
