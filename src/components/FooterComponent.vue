@@ -1,64 +1,26 @@
 <script setup>
-
 </script>
 
 <template>
-    <div class="Frame1">
-        <div class="myName">
-            <p class="boldParagraph">Desarrollador</p>
-            <p>Benjamin Ortega</p>
+    <div class="d-flex justify-content-between align-items-center bg-dark text-white py-4 px-5">
+        
+        <div class="d-flex flex-column align-items-center small">
+            <p class="fw-bold m-0">Desarrollador</p>
+            <p class="m-0">Benjamin Ortega</p>
         </div>
-        <a class="linkRef" href="https://github.com/lBenjaminOrtegal">Github</a>
+        
+        <a 
+            class="text-decoration-none fw-bold fs-5 text-white link-light" 
+            href="https://github.com/lBenjaminOrtegal"
+            target="_blank"
+        >
+            Github
+        </a>
     </div>
 </template>
 
 <style scoped>
-    .Frame1 {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #34312D;
-        height: 100px;
-        padding: 0 64px;
-        box-sizing: border-box;
-        flex-shrink: 0;
-    }
-
-    .myName {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: white;
-        font-size: 14px;
-    }
-
-    .linkRef {
-        font-size: 20px;
-        font-weight: 600;
-        text-decoration: none;
-        color: white;
-        padding: 24px 0;
-        display: block;
-    }
-
-    .linkRef:hover {
-        color: #DED1C0;
-    }
-
-    @media (max-width: 768px) {
-        .Frame1 {
-            height: 70px;
-            padding: 0 20px;
-        }
-        
-        .myName {
-            font-size: 12px; 
-        }
-
-        .linkRef {
-            font-size: 16px; 
-            padding: 10px 0;
-        }
+    .link-light:hover {
+        color: #0d6efd !important; 
     }
 </style>

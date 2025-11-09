@@ -1,120 +1,62 @@
 <script setup>
-    import { ref } from 'vue';
-    import { useMallaStore } from '../../stores/malla';
+import { ref } from 'vue';
+import { useMallaStore } from '../../stores/malla';
 
-    const mallaStore = useMallaStore();
+const mallaStore = useMallaStore();
 
-    const codigo = ref("");
+const codigo = ref("");
 
-    function handleSubmit() {
-        if (!codigo.value) {
-            alert("Rellena el espacio");
-            return;
-        }
-        const ramoExiste = mallaStore.ramos.find(ramo => ramo.codigo === codigo.value);
-
-        if (ramoExiste) {
-            mallaStore.deleteRamo(codigo.value);
-        }
-        else {
-            alert(`No se encuentra el ramo con código '${codigoRamo}' en la malla.`);
-        }
-        codigo.value = "";
+function handleSubmit() {
+    if (!codigo.value) {
+        console.error("Rellena el espacio");
+        return;
     }
+
+    const codigoRamo = codigo.value;
+
+    const ramoExiste = mallaStore.ramos.find(ramo => ramo.codigo === codigoRamo);
+
+    if (ramoExiste) {
+        mallaStore.deleteRamo(codigoRamo);
+    }
+    else {
+        console.error(`No se encuentra el ramo con código '${codigoRamo}' en la malla.`);
+    }
+    codigo.value = "";
+}
 </script>
 
 <template>
-    <div class="deleteRamo">
-        <div class="Text">
-            <h2>Eliminar Ramo</h2>
-            <p class="Regular14px">Elimina un ramo de tu malla actual, respeta los formatos.</p>
+
+    <div class="mx-auto p-4 border rounded-3 shadow-lg my-4" style="max-width: 600px;">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-danger mb-0">Eliminar Ramo</h2>
+            <p class="text-muted small mt-1">Elimina un ramo de tu malla actual, respeta los formatos.</p>
         </div>
-        <form @submit.prevent="handleSubmit" class="form">
-            <label for="codigo">Codigo</label>
-            <input placeholder="Ej.: 10101" v-model="codigo" type="text" id="codigo"></input>
-            <button class="addRamoButton">Eliminar</button>
+
+        <form @submit.prevent="handleSubmit" class="d-grid gap-3">
+
+            <div class="mb-3">
+                <label for="codigo" class="form-label fw-bold">Codigo</label>
+                <input placeholder="Ej.: 10101" v-model="codigo" type="text" id="codigo" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-danger btn-lg fw-bold w-100 mt-2">
+                Eliminar
+            </button>
         </form>
     </div>
 </template>
 
 <style scoped>
-    .deleteRamo {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;  
-        border-radius: 16px;
-        padding: 32px;
-        width: 90%; 
-        max-width: 600px; 
-    }
+.btn-danger {
+    background-color: #DA2C38 !important;
+    border-color: #DA2C38 !important;
+}
 
-    .Text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .Text h2 { 
-        font-size: 30px;
-        margin: 0; 
-        color: #34312D; 
-    }
-
-    .form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 16px;
-        width: 100%; 
-    }
-
-    .form label {
-        font-weight: bold;
-        color: #34312D;
-    }
-
-    .form input { 
-        width: 100%; 
-        height: 45px;
-        border: 1px solid #7E7F83;
-        border-radius: 4px;
-        font-size: 16px; 
-        padding: 0 16px; 
-        box-sizing: border-box; 
-        color: #34312D;
-    }
-
-    .form input:focus {
-        border-color: #437057; 
-        outline: none; 
-        box-shadow: 0 0 0 2px rgba(67, 112, 87, 0.2);
-    }
-    
-    .addRamoButton {
-        width: 100%; 
-        height: 50px;
-        display: flex; 
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        font-size: 16px;
-        border: 1px solid #DED1C0; 
-        background-color: #DA2C38;
-        color: white; 
-        cursor: pointer; 
-        transition: all 0.2s ease-in-out; 
-    }
-
-    .addRamoButton:hover {
-        background-color: #34312D; 
-        color: white; 
-        border-color: #34312D;
-    }
+.btn-danger:hover {
+    background-color: #34312D !important;
+    border-color: #34312D !important;
+}
 </style>

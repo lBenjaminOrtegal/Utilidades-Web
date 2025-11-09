@@ -1,69 +1,41 @@
 <script setup>
-    import { useNotasStore } from '../../stores/notas';
+import { useNotasStore } from '../../stores/notas';
 
-    const notasStore = useNotasStore();
+const notasStore = useNotasStore();
 
-    function seleccionarRamo(ramo) {
-        notasStore.seleccionarRamo(ramo);
-    }
-
+function seleccionarRamo(ramo) {
+    notasStore.seleccionarRamo(ramo);
+}
 </script>
 
 <template>
-    <div class="ramos">
-        <div class="buttons">
-            <div v-for="ramo in notasStore.ramos" :key="ramo.nombre" class="ramoButton">
-                <p @click="seleccionarRamo(ramo)"
-                    :class="['buttonAlternar', { 'buttonAlternarClicked': ramo.nombre === notasStore.ramoActual.nombre }]">
-                    {{ ramo.nombre }}
-                </p>
-            </div>
+    <div class="d-flex justify-content-center flex-wrap gap-2 py-3 mx-auto" style="max-width: 800px;">
+
+        <div v-for="ramo in notasStore.ramos" :key="ramo.nombre">
+
+            <button @click="seleccionarRamo(ramo)" type="button" :class="['btn', 'fw-bold', 'py-2', 'px-3', 'ramo-button',
+                { 'btn-dark': ramo.nombre === notasStore.ramoActual.nombre },
+                { 'btn-outline-dark': ramo.nombre !== notasStore.ramoActual.nombre }]">
+
+                {{ ramo.nombre }}
+            </button>
         </div>
+
     </div>
 </template>
 
 <style scoped>
-    .ramos {
-        gap: 16px;
-        align-items: center;
-        justify-content: center;
-    }
+.btn-outline-dark {
+    background-color: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+    transition: all 0.2s ease-in-out;
+}
 
-    .buttons {
-        justify-content: center;
-        display: flex;
-        flex-wrap: wrap;
-        max-width: 800px;
-        gap: 12px;
-    }
-
-    .ramoButton {
-        padding: 8px;
-    }
-
-    .buttonAlternar {
-        padding: 12px 16px;
-        display: flex;
-        width: 180px;
-        height: 30px;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        font-size: 16px;
-        border: 1px solid #DED1C0; 
-        background-color: #DED1C0;
-        color: #34312D; 
-        cursor: pointer; 
-        user-select: none;
-        transition: all 0.2s ease-in-out; 
-    }
-
-    .buttonAlternar:hover, .buttonAlternarClicked {
-        background-color: #34312D; 
-        color: white;
-        border: 1px solid #34312D;
-    }
+.btn-outline-dark:hover,
+.btn-dark {
+    background-color: #34312D !important;
+    color: white !important;
+    border-color: #34312D !important;
+}
 </style>

@@ -1,129 +1,95 @@
 <script setup>
-    import { useNotasStore } from '../../stores/notas';
+import { useNotasStore } from '../../stores/notas';
 
-    const notasStore = useNotasStore();
+const notasStore = useNotasStore();
 
-    function alternarPromedioSimple() {
-        notasStore.alternarPromedioSimple();
-    }
+function alternarPromedioSimple() {
+    notasStore.alternarPromedioSimple();
+}
 
-    function agregarEvaluacion() {
-        notasStore.agregarEvaluacion();
-    }
+function agregarEvaluacion() {
+    notasStore.agregarEvaluacion();
+}
 
-    function eliminarEvaluacion() {
-        notasStore.eliminarEvaluacion();
-    }
-
+function eliminarEvaluacion() {
+    notasStore.eliminarEvaluacion();
+}
 </script>
 
 <template>
-    <div class="cantidadEvaluaciones">
-        <p class="bold20px">Evaluaciones</p>
-        <div class="seleccionarCantidad">
-            <div @click="eliminarEvaluacion()" class="menosButton">
-                <p>-</p>
-            </div>
-            <div class="cantidadButton">
-                <p>{{ notasStore.ramoActual.evaluaciones.length }}</p>
-            </div>
-            <div @click="agregarEvaluacion" class="masButton">
-                <p>+</p>
+    <div class="card p-3 shadow-sm mx-auto notes-control-card">
+
+        <h5 class="fw-bold mb-3 text-center text-dark border-bottom pb-2">Configuración de Notas</h5>
+
+        <div class="d-grid gap-2 mb-4">
+
+            <p class="mb-0 fw-semibold text-dark fs-5 text-center">Evaluaciones</p>
+
+            <div class="d-flex justify-content-center">
+                <div class="btn-group border rounded-pill overflow-hidden" role="group">
+
+                    <button @click="eliminarEvaluacion()" type="button" class="btn btn-sm action-btn btn-danger-custom">
+                        <span class="fs-5 fw-bold">-</span>
+                    </button>
+
+                    <div class="bg-light px-3 d-flex align-items-center justify-content-center">
+                        <span class="fs-5 fw-bold text-dark">{{ notasStore.ramoActual.evaluaciones.length }}</span>
+                    </div>
+
+                    <button @click="agregarEvaluacion" type="button" class="btn btn-sm action-btn btn-success-custom">
+                        <span class="fs-5 fw-bold">+</span>
+                    </button>
+                </div>
             </div>
         </div>
-        <div @click="alternarPromedioSimple"
-            :class="['buttonAlternarPromedio', { 'buttonAlternarClicked': notasStore.ramoActual.promedioSimple }]">
-            <p>{{ notasStore.ramoActual.promedioSimple ? 'Promedio Simple' : 'Promedio Ponderado' }}</p>
+
+        <div class="d-grid">
+            <button @click="alternarPromedioSimple" :class="['btn', 'fw-bold', 'py-2', 'toggle-btn',
+                { 'btn-primary': !notasStore.ramoActual.promedioSimple },
+                { 'btn-dark': notasStore.ramoActual.promedioSimple }]">
+
+                <span v-if="notasStore.ramoActual.promedioSimple">Promedio Simple</span>
+                <span v-else>Promedio Ponderado</span>
+            </button>
         </div>
+
     </div>
 </template>
 
 <style scoped>
+.notes-control-card {
+    max-width: 350px;
+    border-radius: 12px;
+}
 
-    .cantidadEvaluaciones {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        max-width: 330px;
-        max-height: fit-content;
-        border-radius: 16px;
-        gap: 16px;
-        padding: 32px;
-    }
+.action-btn {
+    width: 45px;
+    padding: 4px 0;
+    line-height: 1;
+    border: none;
+}
 
-    .bold20px {
-        font-size: 20px;
-        font-weight: bold;
-        color: #34312D;
-    }
+.btn-danger-custom {
+    background-color: #DA2C38;
+    color: white;
+}
 
-    .seleccionarCantidad {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 180px;
-        height: 40px;
-    }
+.btn-danger-custom:hover {
+    background-color: #A9212C;
+    color: white;
+}
 
-    .menosButton, .cantidadButton, .masButton {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 24px;
-        font-weight: bold;
-        width: 60px;
-        height: 40px;
-        transition: all 0.2s ease-in-out;
-        border: 1px solid #DED1C0; 
-    }  
+.btn-success-custom {
+    background-color: #226F54;
+    color: white;
+}
 
-    .menosButton {
-        background-color: #DA2C38;
-        color: white;
-        border-radius: 8px 0px 0px 8px;
-        cursor: pointer;
-        user-select: none;
-    }
+.btn-success-custom:hover {
+    background-color: #174E3C;
+    color: white;
+}
 
-    .cantidadButton{
-        background-color: #DED1C0;
-        color: #34312d;
-    }
-
-    .masButton {
-        background-color: #226F54;
-        color: white;
-        border-radius: 0px 8px 8px 0px;
-        cursor: pointer;
-        user-select: none;
-    }
-
-    .buttonAlternarPromedio {
-        padding: 12px 16px;
-        display: flex;
-        width: 180px;
-        height: 30px;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        font-size: 16px;
-        border: 1px solid #DED1C0; 
-        background-color: #DED1C0;
-        color: #34312D; 
-        cursor: pointer; 
-        user-select: none;
-        transition: all 0.2s ease-in-out; 
-    }
-
-    .buttonAlternarClicked, .menosButton:hover, .masButton:hover {
-        background-color: #34312D; 
-        color: white;
-        border: 1px solid #34312D;
-    }
-
+.toggle-btn {
+    transition: background-color 0.2s, color 0.2s;
+}
 </style>

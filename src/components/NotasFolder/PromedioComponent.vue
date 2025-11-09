@@ -1,92 +1,69 @@
 <script setup>
-    import { useNotasStore } from '../../stores/notas';
+import { useNotasStore } from '../../stores/notas';
 
-    const notasStore = useNotasStore();
+const notasStore = useNotasStore();
+
+const UMBRAL_APROBACION = 4;
 
 </script>
 
 <template>
-    <div class="informacionRamo">
-        <div class="cuadroPromedio">
-            <p class="bold20px">Promedio</p>
-            <p class="bold40px"
-                :class="['bold40px', { 'bold40pxPromedioRojo': notasStore.promedioRamo < 3.95 }, { 'bold40pxPromedioVerde': notasStore.promedioRamo >= 3.95 }]">
-                {{ notasStore.promedioRamo }}</p>
-            <input class="nombreRamoInput" v-model="notasStore.ramoActual.nombre" type="text" id="nombreRamo" />
-            <div v-if="notasStore.calcularPonderacion !== 100 && notasStore.ramoActual.promedioSimple == false" class="alertaError">
-                Ponderacion no es 100 ({{ notasStore.calcularPonderacion }})</div>
+    <div class="card p-3 shadow-lg mx-auto text-center ramo-info-card">
+
+        <p class="h5 fw-bold text-dark mb-2 border-bottom pb-2">Promedio</p>
+
+        <p :class="['display-4', 'fw-bold', 'mb-3',
+            { 'text-danger-custom': notasStore.promedioRamo < UMBRAL_APROBACION },
+            { 'text-success-custom': notasStore.promedioRamo >= UMBRAL_APROBACION }]">
+            {{ notasStore.promedioRamo }}
+        </p>
+
+        <input class="form-control form-control-lg text-center fw-semibold mb-3 nombre-ramo-input"
+            v-model="notasStore.ramoActual.nombre" type="text" placeholder="Nombre del Ramo"
+            aria-label="Nombre del Ramo" />
+
+        <div v-if="notasStore.calcularPonderacion !== 100 && notasStore.ramoActual.promedioSimple === false"
+            class="alert alert-danger p-2 mb-0 alerta-ponderacion" role="alert">
+            La ponderación no es 100% (Actual: {{ notasStore.calcularPonderacion }}%)
         </div>
+
     </div>
 </template>
 
 <style scoped>
-    .informacionRamo {
-        gap: 16px;
-        display: flex;
-        flex-direction: column;
-    }
+.ramo-info-card {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 12px;
+}
 
-    .cuadroPromedio {
-        display: flex;
-        flex-direction: column;
-        width: 240px;
-        height: 130px;
-        align-items: center;
-        gap: 16px;
-        padding: 16px;
-    }
+.text-danger-custom {
+    color: #DA2C38 !important;
+}
 
-    .bold20px {
-        font-size: 20px;
-        font-weight: bold;
-        color: #34312D;
-    }
+.text-success-custom {
+    color: #226F54 !important;
+}
 
-    .bold40px {
-        font-size: 40px;
-        font-weight: bold;
-        color: #34312D;
-    }
+.nombre-ramo-input {
+    border: 1px solid #34312D;
+    color: #34312D;
+}
 
-    .bold40pxPromedioRojo {
-        color: #DA2C38;
-    }
+.nombre-ramo-input:focus {
+    border-color: #437057;
+    box-shadow: 0 0 0 0.25rem rgba(67, 112, 87, 0.2);
+}
 
-    .bold40pxPromedioVerde {
-        color: #226F54;
-    }
+.alerta-ponderacion {
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    cursor: default;
+}
 
-    input, .nombreRamoInput { 
-        width: 200px; 
-        height: 45px;
-        border: 1px solid #34312D;
-        border-radius: 4px;
-        font-size: 18px;
-        text-align: center;
-        padding: 0 16px; 
-        box-sizing: border-box; 
-        color: #34312D;
-    }
-
-    .nombreRamoInput {
-        font-size: 20px;
-        padding: 4px;
-        width: 195px;
-        border-radius: 8px;
-        border: 1px solid #34312D;
-        text-align: center;
-    }
-
-    .alertaError {
-        color: #DA2C38;
-        font-weight: bold;
-        transition: all 0.2s ease-in-out;
-        user-select: none;
-    }
-
-    .alertaError:hover {
-        font-weight: bold;
-        scale: 1.2;
-    }
-
+.alerta-ponderacion:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 5px rgba(218, 44, 56, 0.5);
+}
 </style>

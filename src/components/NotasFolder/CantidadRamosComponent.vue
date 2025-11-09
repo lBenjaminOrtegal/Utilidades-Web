@@ -13,61 +13,48 @@
 </script>
 
 <template>
-    <div class="configurarRamos">
-        <p class="bold20px">Editar Ramos</p>
-        <div @click="agregarRamo" class="addRamoButton">Agregar Ramo</div>
-        <div @click="eliminarRamo" class="deleteRamoButton">Eliminar Ramo</div>
+    <div class="card p-3 shadow-sm mx-auto text-center" style="max-width: 250px;">
+        
+        <h5 class="fw-bold mb-3 text-dark border-bottom pb-2">Editar Ramos</h5>
+        
+        <div class="d-grid gap-2">
+            
+            <button @click="agregarRamo" 
+                    type="button" 
+                    class="btn btn-success-custom fw-bold py-2">
+                Agregar Ramo
+            </button>
+            
+            <button @click="eliminarRamo" 
+                    type="button" 
+                    class="btn btn-danger-custom fw-bold py-2">
+                Eliminar Ramo
+            </button>
+        </div>
     </div>
 </template>
 
 <style scoped>
-    .configurarRamos {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: fit-content;
-        max-height: fit-content;
-        gap: 16px;
-        padding: 16px;
-        border-radius: 16px;
-    }
-
-    .addRamoButton, .deleteRamoButton {
-        padding: 12px 16px;
-        display: flex;
-        width: 140px;
-        height: 30px;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        font-size: 16px;
-        border: 1px solid #DED1C0;
-        color: white; 
-        cursor: pointer; 
-        user-select: none;
+    .btn-success-custom {
+        background-color: #226F54;
+        color: white;
+        border: 1px solid #226F54;
         transition: all 0.2s ease-in-out;
     }
 
-    .addRamoButton {
-        background-color: #226F54;
-    }
-
-    .addRamoButton:hover, .deleteRamoButton:hover {
-        background-color: #34312D; 
+    .btn-danger-custom {
+        background-color: #DA2C38;
         color: white;
-        border: 1px solid #34312D;
+        border: 1px solid #DA2C38;
+        transition: all 0.2s ease-in-out;
     }
 
-    .deleteRamoButton {
-        background-color: #DA2C38; 
-    }
-
-    .bold20px {
-        font-size: 20px;
-        font-weight: bold;
-        color: #34312D;
+    .btn-success-custom:hover, 
+    .btn-danger-custom:hover {
+        background-color: #34312D;
+        color: white;
+        border-color: #34312D;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 </style>

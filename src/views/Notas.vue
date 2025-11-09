@@ -10,33 +10,25 @@
 </script>
 
 <template>
-    <div class="container">
+
+    <div class="d-flex flex-column min-vh-100 bg-light">
+        
         <HeaderComponent></HeaderComponent>
-        <div class="config">
-            <CantidadEvaluacionesComponent></CantidadEvaluacionesComponent>
-            <PromedioComponent></PromedioComponent>
-            <CantidadRamosComponent></CantidadRamosComponent>
-            <MostrarRamosComponent></MostrarRamosComponent>
-        </div>
-        <NotasComponent></NotasComponent>
+        
+        <main class="flex-grow-1 container-fluid py-4">
+        
+            <section class="d-flex flex-wrap justify-content-center gap-4 mb-4">
+                <CantidadEvaluacionesComponent></CantidadEvaluacionesComponent>
+                <PromedioComponent></PromedioComponent>
+                <CantidadRamosComponent></CantidadRamosComponent>
+            </section>
+            
+            <MostrarRamosComponent class="mb-4"></MostrarRamosComponent>
+            
+            <NotasComponent></NotasComponent>
+            
+        </main>
+        
         <FooterComponent></FooterComponent>
     </div>
 </template>
-
-<style scoped>
-    .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 100vh;
-    }
-
-    .config {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        padding: 16px;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
-</style>
