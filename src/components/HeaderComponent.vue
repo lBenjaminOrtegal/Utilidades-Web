@@ -1,93 +1,168 @@
 <script setup>
+import { ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
+const router = useRouter();
+const route = useRoute();
+
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+    isMenuOpen.value = !isMenuOpen.value;
+};
+
+const navigateTo = (path) => {
+    isMenuOpen.value = false;
+    router.push(path);
+};
+
+const isActive = (path) => {
+    return route.path === path;
+};
 </script>
 
 <template>
-    <header class="headerClass">
-        <h1 class="headerTitle">Utilidades Web</h1>
-        <div class="Links">
-            <div class="navLink">
-                <RouterLink class="link" to="/">Inicio</RouterLink>
-            </div>
-            <div class="navLink">
-                <RouterLink class="link" to="/malla">Malla</RouterLink>
-            </div>
-            <div class="navLink">
-                <RouterLink class="link" to="/notas">Notas</RouterLink>
-            </div>
-            <div class="navLink">
-                <RouterLink class="link" to="/tareas">Tareas</RouterLink>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top custom-navbar">
+        <div class="container">
+
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <img src="/src/assets/nombreUTILS.png" alt="Logo" width="200" class="d-inline-block align-text-top">
+            </a>
+
+            <button class="navbar-toggler custom-toggler border-0" type="button" @click="toggleMenu"
+                aria-controls="navbarNav" :aria-expanded="isMenuOpen" aria-label="Toggle navigation"
+                :class="{ 'active': isMenuOpen }">
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+            </button>
+
+            <div class="collapse navbar-collapse mobile-anim" :class="{ 'show': isMenuOpen }" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-2 gap-lg-1">
+
+                    <li class="nav-item">
+                        <a class="nav-link custom-link" :class="{ 'active-nav': isActive('/') }" href="#"
+                            @click.prevent="navigateTo('/')">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link custom-link" :class="{ 'active-nav': isActive('/malla') }" href="#"
+                            @click.prevent="navigateTo('/malla')">
+                            Malla
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link custom-link" :class="{ 'active-nav': isActive('/notas') }"
+                            href="#" @click.prevent="navigateTo('/notas')">
+                            Notas
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link custom-link" :class="{ 'active-nav': isActive('/tareas') }" href="#"
+                            @click.prevent="navigateTo('/tareas')">
+                            Tareas
+                        </a>
+                    </li>
+
+                    <li class="nav-item d-lg-none w-100">
+                        <hr class="dropdown-divider">
+                    </li>
+
+                </ul>
             </div>
         </div>
-    </header>
+    </nav>
 </template>
 
 <style scoped>
-    .headerTitle {
-        font-size: 24px;
-        font-weight: 600;
-        color: #34312D;
+.custom-navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+    padding: 12px 0;
+}
+
+.custom-link {
+    color: #4B525C;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 8px 16px !important;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.custom-link:hover {
+    background-color: #f3f4f6;
+}
+
+.custom-toggler {
+    outline: none;
+    box-shadow: none !important;
+    padding: 0.25rem 0.5rem;
+}
+
+.hamburger-lines {
+    width: 30px;
+    height: 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.line {
+    display: block;
+    height: 3px;
+    width: 100%;
+    border-radius: 10px;
+    background: #34353B;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.custom-toggler.active .line1 {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.custom-toggler.active .line2 {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.custom-toggler.active .line3 {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.navbar-collapse.collapsing {
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0.5;
+}
+
+.navbar-collapse.show {
+    opacity: 1;
+}
+
+.active-nav {
+    background-color: #e5e7eb;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: white;
+        padding: 1rem;
+        border-top: 1px solid #eee;
+        margin-top: 10px;
     }
 
-    .headerClass {
-        height: 100px;
-        padding: 0 100px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #7E7F83;
-        box-sizing: border-box;
+    .btn-login {
         width: 100%;
+        margin-top: 10px;
+        text-align: center;
     }
-
-    .Links {
-        display: flex;
-        align-items: center;
-        gap: 32px;
-    }
-
-    .link {
-        font-size: 20px;
-        text-decoration: none;
-        color: #34312D;
-        transition: color 0.2s ease-in-out;
-    }
-
-    .link:hover {
-        color: #DED1C0;
-    }
-
-    @media (max-width: 768px) {
-        .headerClass {
-            height: auto;
-            padding: 15px 20px;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .headerTitle {
-            font-size: 20px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .Links {
-            width: 100%;
-            gap: 10px;
-            justify-content: space-between;
-        }
-        
-        .navLink {
-            flex-basis: auto; 
-            flex-grow: 1; 
-            text-align: center; 
-        }
-
-        .link {
-            font-size: 16px;
-            padding: 5px 0;
-            display: block;
-        }
-    }
+}
 </style>

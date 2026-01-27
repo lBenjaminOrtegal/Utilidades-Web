@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@vuepic/vue-datepicker": "^11.0.2",
+    "bootstrap": "^5.3.8",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.5.0",
     "vue": "^3.5.22",
@@ -18,6 +21,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
-    "vite": "^7.1.7"
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^27.0.0",
+    "sass": "^1.97.3",
+    "vite": "^7.1.7",
+    "vitest": "^3.2.4"
   }
 }

@@ -1,39 +1,62 @@
 <script setup>
-    import { useNotasStore } from '../../stores/notas';
+import { useNotasStore } from '../../stores/notas';
 
-    const notasStore = useNotasStore();
+const notasStore = useNotasStore();
 
-    function eliminarEvaluacion(evaluacionAEliminar) {
-        notasStore.eliminarEvaluacion(evaluacionAEliminar);
-    }
+function eliminarEvaluacion(evaluacionAEliminar) {
+    notasStore.eliminarEvaluacion(evaluacionAEliminar);
+}
 
-    function calcularNotaPendiente(evaluacionPendiente) {
-        notasStore.calcularNotaPendiente(evaluacionPendiente);
-    }
+function calcularNotaPendiente(evaluacionPendiente) {
+    notasStore.calcularNotaPendiente(evaluacionPendiente);
+}
 
 </script>
 
 <template>
-    <div class="informacionNotas">
-        <div class="evaluaciones">
-            <div v-for="(evaluacion, index) in notasStore.ramoActual.evaluaciones" :key="index" class="evaluacion">
-                <div class="inputs">
-                    <input type="text" v-model="evaluacion.nombreNota" placeholder="Nombre"
-                        id="nombreEvaluacion-{{ index }}" />
+    <div class="d-flex flex-wrap justify-content-center gap-3 py-4">
 
-                    <label :for="'notaEvaluacion-' + index">Nota</label>
-                    <input type="number" onclick="this.select();" min="1" max="7" step="0.1"
-                        v-model.number="evaluacion.nota" :id="'notaEvaluacion-' + index" />
-                    <div
-                        :class="['alternar', { 'alternarPonderacion': !notasStore.ramoActual.promedioSimple }, { 'alternarPonderacionOculto': notasStore.ramoActual.promedioSimple }]">
-                        <label :for="'ponderacion-' + index">Ponderación (%)</label>
-                        <input class="ponderacionInput" type="number" onclick="this.select();" min="1" max="100"
-                            step="0.01" v-model.number="evaluacion.ponderacion" :id="'ponderacion-' + index" />
+        <div v-for="(evaluacion, index) in notasStore.ramoActual.evaluaciones" :key="index"
+            class="card shadow-sm custom-card">
+
+            <div class="card-body p-3">
+
+                <button @click="eliminarEvaluacion(evaluacion)"
+                    class="btn-close delete-btn position-absolute top-0 end-0 m-2"
+                    aria-label="Eliminar evaluación"></button>
+
+                <div class="row g-3 inputs-container pt-3">
+                    <div class="col-12">
+                        <label :for="'nombreEvaluacion-' + index" class="form-label fw-semibold">Nombre</label>
+                        <input type="text" v-model="evaluacion.nombreNota" :id="'nombreEvaluacion-' + index"
+                            placeholder="Nombre de la Evaluación" class="form-control focus-custom" />
                     </div>
-                </div>
-                <div class="evaluacionesButtons">
-                    <p @click="calcularNotaPendiente(evaluacion)" class="buttonAlternarPendiente">Pendiente</p>
-                    <p @click="eliminarEvaluacion(evaluacion)" class="eliminarEvaluacionButton">X</p>
+
+                    <div class="col-12 row gx-2 gy-3 align-items-end">
+                        <div :class="[notasStore.ramoActual.promedioSimple ? 'col-6' : 'col-sm-3']">
+                            <label :for="'notaEvaluacion-' + index" class="form-label fw-semibold">Nota</label>
+                            <input type="number" onclick="this.select();" min="1" max="7" step="0.1"
+                                v-model.number="evaluacion.nota" :id="'notaEvaluacion-' + index"
+                                class="form-control text-center nota-input focus-custom" />
+                        </div>
+
+                        <div v-if="!notasStore.ramoActual.promedioSimple" class="col-sm-5">
+                            <label :for="'ponderacion-' + index" class="form-label fw-semibold">Ponderación (%)</label>
+                            <input class="form-control text-center focus-custom" type="number" onclick="this.select();"
+                                min="1" max="100" step="0.01" v-model.number="evaluacion.ponderacion"
+                                :id="'ponderacion-' + index" />
+                        </div>
+
+                        <div :class="[notasStore.ramoActual.promedioSimple ? 'col-6' : 'col-sm-4']">
+                            <label
+                                class="form-label fw-semibold text-white d-none d-sm-block invisible"></label>
+                            <button @click="calcularNotaPendiente(evaluacion)"
+                                class="btn btn-block btn-custom-secondary fw-bold w-100">
+                                Pendiente
+                            </button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,156 +64,55 @@
 </template>
 
 <style scoped>
+.custom-card {
+    width: 100%;
+    max-width: 420px;
+    --bs-card-border-width: 1px;
+    --bs-card-border-color: #e2e2e2;
+    --bs-card-border-radius: 12px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
 
-    .informacionNotas {
-        display: flex;
-        gap: 32px;
-        padding: 32px 32px;
-        align-items: center;
-        justify-content: center;
-    }
+.delete-btn {
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
 
-    .evaluaciones {
-        display: flex;
-        flex-wrap: wrap;
-        width: fit-content;
-        height: fit-content;
-        gap: 16px;
-        justify-content: center;
-    }
+.delete-btn:hover {
+    opacity: 1;
+}
 
-    .evaluacion {
-        padding: 16px;
-        display: flex;
+.form-control.focus-custom:focus {
+    border-color: #e2e2e2;
+    box-shadow: 0 0 0 0.25rem rgba(67, 112, 87, 0.2);
+}
 
-        width: fit-content;
-        height: fit-content;
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-        border: 2px solid #34312D;
-        border-radius: 16px;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-    }
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
 
-    .alternarPonderacion {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        gap: 16px;
-    }
+.nota-input,
+.form-control[type="number"] {
+    text-align: center;
+}
 
-    .alternarPonderacionOculto {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        opacity: 0.1;
-        gap: 16px;
-    }
-
-
-    .inputs {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        gap: 16px;
-        width: 100%; 
-    }
-
-    .inputs label {
-        font-weight: bold;
-        color: #34312D;
-        font-size: 18px; 
-    }
-
-    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    input[type="number"] {
-        -moz-appearance: textfield;
-        appearance: texfield;
-    }
-
-    .inputs input[type="number"] {
-        text-align: center;
-    }
-    
-    .inputs input { 
-        width: 200px; 
-        height: 45px;
-        border: 1px solid #34312D;
-        border-radius: 4px;
-        font-size: 18px;
-        text-align: center;
-        padding: 0 16px; 
-        box-sizing: border-box; 
-        color: #34312D;
-    }
-
-    .inputs input:focus {
-        border-color: #437057; 
-        outline: none; 
-        box-shadow: 0 0 0 2px rgba(67, 112, 87, 0.2);
-    }
-    
-    .evaluacionesButtons {
-        gap: 16px;
-        display: flex;
-        align-items: center;
-        user-select: none;
-    }
-
-    .eliminarEvaluacionButton:hover {
-        background-color: #A50104; 
-        color: white; 
-    }
-
-    .eliminarEvaluacionButton {
-        padding: 12px 16px;
-        background-color: #DA2C38;
-        width: fit-content;
-        height: fit-content;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-    }
-
-    .buttonAlternarPendiente {
-        padding: 12px 16px;
-        display: flex;
-        width: 180px;
-        height: 30px;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        font-size: 16px;
-        border: 1px solid #DED1C0; 
-        background-color: #DED1C0;
-        color: #34312D; 
-        cursor: pointer; 
-        user-select: none;
-        transition: all 0.2s ease-in-out; 
-    }
-
-    .buttonAlternarPendiente {
-        width: fit-content;
-        height: fit-content;
-    }
-
-    .buttonAlternarPendiente:hover {
-        background-color: #34312D; 
-        color: white;
-        border: 1px solid #34312D;
-    }
+.btn-custom-secondary {
+    --bs-btn-border-color: #e2e2e2;
+    --bs-btn-bg: #34312D;
+    --bs-btn-color: white;
+    --bs-btn-hover-bg: white;
+    --bs-btn-hover-color: #34312D;
+    --bs-btn-hover-border-color: #e2e2e2;
+    line-height: 1.5;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+}
 </style>

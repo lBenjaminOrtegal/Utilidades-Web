@@ -1,202 +1,99 @@
 <script setup>
-    import { useTareasStore } from '../../stores/tareas';
-    import checkmark from '@/assets/checkmark.svg';
-    import trash from '@/assets/trash.svg'; 
+import { useTareasStore } from '../../stores/tareas';
 
-    const tareasStore = useTareasStore();
+const tareasStore = useTareasStore();
 
-    function deleteTarea(tarea) {
-        tareasStore.eliminarTarea(tarea);
-    }
+function deleteTarea(tarea) {
+    tareasStore.eliminarTarea(tarea);
+}
 
-    function alternateTarea(tarea) {
-        tareasStore.alternarTarea(tarea);
-    }
-
+function alternateTarea(tarea) {
+    tareasStore.alternarTarea(tarea);
+}
 </script>
 
 <template>
-    <div class="tareas">
-        <div v-if="tareasStore.tareas.length > 0" v-for="tarea in tareasStore.tareas" :key="tarea" :class="['tarea', {tareaTerminada: tarea.terminada}, {tareaPendiente: !tarea.terminada}]">
-            <div class="tareaContent">
-                <input class="inputTag" v-model="tarea.tag" type="text" id="tag">
-                <input v-model="tarea.nombre" type="text" id="nombre">
-                <input v-if="tarea.fecha !== ''" class="inputFecha" v-model="tarea.fecha" type="date" id="fecha">
-            </div>
-            <div class="iconBar">
-                <button @click="alternateTarea(tarea)" class="checkButton"><img :src="checkmark" alt="Completar"></button>
-                <button @click="deleteTarea(tarea)" class="trashButton"><img :src="trash" alt="Eliminar"></button>
+    <div class="card shadow-lg mx-auto" style="max-width: 800px;">
+
+        <div class="card-header bg-dark text-white text-center">
+            <h5 class="mb-0 fw-bold">Lista de Tareas Pendientes</h5>
+        </div>
+
+        <div v-if="tareasStore.tareas.length > 0" class="list-group list-group-flush">
+
+            <div v-for="tarea in tareasStore.tareas" :key="tarea.nombre" :class="['list-group-item', 'd-flex', 'align-items-center', 'py-3', 'task-item',
+                { 'list-group-item-success': tarea.terminada },
+                { 'list-group-item-light': !tarea.terminada }]">
+
+                <div class="d-flex flex-column flex-md-row flex-grow-1 me-3">
+
+                    <div class="d-flex flex-column flex-grow-1 me-md-3">
+                        <small
+                            :class="['fw-bold', 'mb-1', { 'text-success': tarea.terminada }, { 'text-primary': !tarea.terminada }]">
+                            {{ tarea.tag || 'General' }}
+                        </small>
+
+                        <input class="form-control border-0 p-0 bg-transparent fw-semibold"
+                            :class="{ 'text-decoration-line-through text-muted': tarea.terminada }" v-model="tarea.nombre"
+                            type="text" placeholder="Nombre de la tarea">
+                    </div>
+
+                    <div v-if="tarea.fecha !== ''" class="mt-2 mt-md-0 text-md-end text-muted small flex-shrink-0">
+                        Vence: <span class="fw-bold">{{ tarea.fecha }}</span>
+                    </div>
+                </div>
+
+                <div class="btn-group btn-group-sm flex-shrink-0 ms-2" role="group">
+
+                    <button @click="alternateTarea(tarea)"
+                        :class="['btn', 'btn-outline-success', 'border-0', { 'active': tarea.terminada }]"
+                        :title="tarea.terminada ? 'Marcar como Pendiente' : 'Completar'">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </button>
+
+                    <button @click="deleteTarea(tarea)" class="btn btn-outline-danger border-0" title="Eliminar Tarea">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-        <p v-else class="bold20px">Aun no agregas tareas por aqui!</p>
+
+        <div v-else class="card-body text-center text-muted">
+            <p class="mb-0">¡No hay tareas pendientes! Disfruta de tu tiempo libre!</p>
+        </div>
     </div>
 </template>
 
 <style scoped>
-    .tareaContent {
-        display: flex;
-        justify-content: space-between;
-    }
+.task-item input {
+    box-shadow: none !important;
+    cursor: text;
+}
 
-    .bold20px {
-        font-size: 20px;
-        color: #34312D;
-        font-weight: bold;
-    }
+.task-item:hover {
+    cursor: default;
+    background-color: var(--bs-light);
+}
 
-    .tareas {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 800px;
-        padding: 24px;
-        gap: 12px;
-        border-radius: 8px;
-        box-sizing: border-box;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-    }
+.list-group-item-success {
+    border-left: 5px solid var(--bs-success);
+}
 
-    input[type="date"]::-webkit-inner-spin-button,
-    input[type="date"]::-webkit-calendar-picker-indicator {
-        display: none;
-        -webkit-appearance: none;
-    }
+.list-group-item-light {
+    border-left: 5px solid var(--bs-secondary);
+}
 
-    .iconBar {
-        display: flex;
-    }
-
-    .tarea {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #34312D;
-        width: 100%;
-        max-width: 800px;
-        border-radius: 8px;
-        transition: background-color 0.2s ease, transform 0.2s ease;
-        overflow: hidden;
-        border: #34312D 1px solid;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        box-sizing: border-box;
-    }
-
-    .tarea:hover {
-        transform: translateY(-2px);
-    }
-
-    .trashButton,
-    .checkButton {
-        border: none;
-        background-color: transparent;
-        padding: 0px 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        flex-shrink: 0;
-        width: 50%;
-        height: 50px;
-    }
-
-    .checkButton {
-        background-color: #35A7FF;
-    }
-
-    .trashButton {
-        background-color: #FF5964;
-    }
-
-    .checkButton img,
-    .trashButton img {
-        width: 24px;
-        height: 24px;
-    }
-
-    .trashButton:hover,
-    .checkButton:hover {
-        background-color: white;
-    }
-
-    .tarea input {
-        flex-grow: 1;
-        background-color: transparent;
-        padding: 12px 8px;
-        font-size: 16px;
-        color: white;
-        border: none;
-        outline: none;
-        transition: border-bottom 0.2s ease;
-    }
-
-    .inputTag {
-        font-weight: bold;
-        width: 200px;
-        flex-shrink: 0;
-    }
-
-    .tareaTerminada {
-        background-color: #f4f4f4;
-        opacity: 0.8;
-    }
-
-    .tareaTerminada input {
-        text-decoration: line-through;
-        color: #777 !important;
-    }
-
-    @media (max-width: 768px) {
-        .tareas {
-            padding: 16px 8px;
-        }
-
-        .tarea {
-            flex-wrap: wrap;
-            padding: 0;
-        }
-
-        .tareaContent {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            padding: 8px 0;
-        }
-
-        .tarea input {
-            padding: 10px 16px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .inputTag {
-            width: 100%;
-        }
-
-        .checkIcon,
-        .trashIcon {
-            width: 50%;
-            height: 30%;
-            border-radius: 0;
-            padding: 0;
-            border: none;
-            margin: 0;
-        }
-
-        .iconBar {
-            display: flex;
-            width: 100%;
-            margin-top: 8px;
-            border-radius: 0 0 8px 8px;
-            overflow: hidden;
-        }
-
-        .trashIcon {
-            border-radius: 0 0 8px 0;
-        }
-
-        .checkIcon {
-            border-radius: 0 0 0 8px;
-        }
-    }
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
 </style>

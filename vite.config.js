@@ -11,4 +11,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'), // ESTA LÍNEA ES LA CLAVE
     },
   },
+  test: {
+    globals: true,
+    environment: 'jsdom'
+  }
 })
