@@ -17,7 +17,11 @@ function eliminarEvaluacion() {
 </script>
 
 <template>
+<<<<<<< HEAD
     <div class="p-3 notes-control-card">
+=======
+    <div class="card p-3 shadow-sm mx-auto notes-control-card">
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 
         <h5 class="fw-bold mb-3 text-center text-dark border-bottom pb-2">Configuración de Notas</h5>
 
@@ -45,7 +49,11 @@ function eliminarEvaluacion() {
 
         <div class="d-grid">
             <button @click="alternarPromedioSimple" :class="['btn', 'fw-bold', 'py-2', 'toggle-btn',
+<<<<<<< HEAD
                 { 'btn-light': !notasStore.ramoActual.promedioSimple },
+=======
+                { 'btn-primary': !notasStore.ramoActual.promedioSimple },
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
                 { 'btn-dark': notasStore.ramoActual.promedioSimple }]">
 
                 <span v-if="notasStore.ramoActual.promedioSimple">Promedio Simple</span>
@@ -91,6 +99,9 @@ function eliminarEvaluacion() {
 
 .toggle-btn {
     transition: background-color 0.2s, color 0.2s;
+<<<<<<< HEAD
     border: 1px solid #e2e2e2;
+=======
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 }
 </style>

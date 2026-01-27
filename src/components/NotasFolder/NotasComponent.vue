@@ -67,8 +67,13 @@ function calcularNotaPendiente(evaluacionPendiente) {
 .custom-card {
     width: 100%;
     max-width: 420px;
+<<<<<<< HEAD
     --bs-card-border-width: 1px;
     --bs-card-border-color: #e2e2e2;
+=======
+    --bs-card-border-width: 2px;
+    --bs-card-border-color: #34312D;
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
     --bs-card-border-radius: 12px;
     position: relative;
     transition: all 0.3s ease-in-out;
@@ -84,7 +89,11 @@ function calcularNotaPendiente(evaluacionPendiente) {
 }
 
 .form-control.focus-custom:focus {
+<<<<<<< HEAD
     border-color: #e2e2e2;
+=======
+    border-color: #437057;
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
     box-shadow: 0 0 0 0.25rem rgba(67, 112, 87, 0.2);
 }
 
@@ -105,6 +114,7 @@ input[type="number"] {
 }
 
 .btn-custom-secondary {
+<<<<<<< HEAD
     --bs-btn-border-color: #e2e2e2;
     --bs-btn-bg: #34312D;
     --bs-btn-color: white;
@@ -114,5 +124,15 @@ input[type="number"] {
     line-height: 1.5;
     height: 100%;
     transition: all 0.3s ease-in-out;
+=======
+    --bs-btn-border-color: #0d6efd;
+    --bs-btn-bg: #0d6efd;
+    --bs-btn-color: white;
+    --bs-btn-hover-bg: #34312D;
+    --bs-btn-hover-color: white;
+    --bs-btn-hover-border-color: #34312D;
+    line-height: 1.5;
+    height: 100%;
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 }
 </style>

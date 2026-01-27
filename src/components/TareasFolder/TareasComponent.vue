@@ -15,7 +15,11 @@ function alternateTarea(tarea) {
 <template>
     <div class="card shadow-lg mx-auto" style="max-width: 800px;">
 
+<<<<<<< HEAD
         <div class="card-header bg-dark text-white text-center">
+=======
+        <div class="card-header bg-primary text-white text-center">
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
             <h5 class="mb-0 fw-bold">Lista de Tareas Pendientes</h5>
         </div>
 

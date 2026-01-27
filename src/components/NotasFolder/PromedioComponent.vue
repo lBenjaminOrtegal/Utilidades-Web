@@ -8,7 +8,11 @@ const UMBRAL_APROBACION = 4;
 </script>
 
 <template>
+<<<<<<< HEAD
     <div class="p-3 text-center ramo-info-card">
+=======
+    <div class="card p-3 shadow-lg mx-auto text-center ramo-info-card">
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 
         <p class="h5 fw-bold text-dark mb-2 border-bottom pb-2">Promedio</p>
 
@@ -46,11 +50,16 @@ const UMBRAL_APROBACION = 4;
 }
 
 .nombre-ramo-input {
+<<<<<<< HEAD
     border: 1px solid #e2e2e2;
+=======
+    border: 1px solid #34312D;
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
     color: #34312D;
 }
 
 .nombre-ramo-input:focus {
+<<<<<<< HEAD
     border-color: #e2e2e2;
     box-shadow: 0 0 0 0.25rem rgba(67, 112, 87, 0.2);
 }
@@ -60,5 +69,21 @@ const UMBRAL_APROBACION = 4;
     font-weight: bold;
     transition: all 0.2s ease-in-out;
     cursor: default;
+=======
+    border-color: #437057;
+    box-shadow: 0 0 0 0.25rem rgba(67, 112, 87, 0.2);
+}
+
+.alerta-ponderacion {
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    cursor: default;
+}
+
+.alerta-ponderacion:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 5px rgba(218, 44, 56, 0.5);
+>>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 }
 </style>
