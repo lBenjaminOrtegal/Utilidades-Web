@@ -26,15 +26,9 @@ function seleccionarRamo(ramo) {
 
 <style scoped>
 .btn-outline-dark {
-<<<<<<< HEAD
     background-color: white;
     color: #34312D;
     border-color: #e2e2e2;
-=======
-    background-color: #0d6efd;
-    color: white;
-    border-color: #0d6efd;
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
     transition: all 0.2s ease-in-out;
 }
 
@@ -42,10 +36,6 @@ function seleccionarRamo(ramo) {
 .btn-dark {
     background-color: #34312D !important;
     color: white !important;
-<<<<<<< HEAD
     border-color: #e2e2e2 !important;
-=======
-    border-color: #34312D !important;
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 }
 </style>

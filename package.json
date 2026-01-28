@@ -21,15 +21,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
-<<<<<<< HEAD
     "@vue/test-utils": "^2.4.6",
     "jsdom": "^27.0.0",
     "sass": "^1.97.3",
     "vite": "^7.1.7",
     "vitest": "^3.2.4"
-=======
-    "sass": "^1.93.3",
-    "vite": "^7.1.7"
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
   }
 }

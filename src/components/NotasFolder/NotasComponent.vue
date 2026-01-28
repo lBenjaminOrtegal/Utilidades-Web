@@ -11,6 +11,34 @@ function calcularNotaPendiente(evaluacionPendiente) {
     notasStore.calcularNotaPendiente(evaluacionPendiente);
 }
 
+const formatearYValidarNota = (event, evaluacion) => {
+    let val = event.target.value.replace(/\D/g, "");
+    if (val.length > 3) val = val.slice(0, 3);
+    let resultado = "";
+
+    if (val.length === 2) {
+        resultado = val[0] + "," + val[1];
+    } else if (val.length === 3) {
+        resultado = val[0] + "," + val[1] + val[2];
+    } else {
+        resultado = val;
+    }
+
+    let numCheck = parseFloat(resultado.replace(",", "."));
+
+    if (numCheck > 7) {
+        resultado = "7,0";
+        numCheck = 7.0;
+    }
+    if (numCheck < 1) {
+        resultado = "1,0";
+        numCheck = 1.0;
+    }
+    
+    event.target.value = resultado;
+    evaluacion.nota = isNaN(numCheck) ? null : numCheck;
+};
+
 </script>
 
 <template>
@@ -35,8 +63,9 @@ function calcularNotaPendiente(evaluacionPendiente) {
                     <div class="col-12 row gx-2 gy-3 align-items-end">
                         <div :class="[notasStore.ramoActual.promedioSimple ? 'col-6' : 'col-sm-3']">
                             <label :for="'notaEvaluacion-' + index" class="form-label fw-semibold">Nota</label>
-                            <input type="number" onclick="this.select();" min="1" max="7" step="0.1"
-                                v-model.number="evaluacion.nota" :id="'notaEvaluacion-' + index"
+                            <input type="text" inputmode="numeric" onclick="this.select();" :value="evaluacion.nota"
+                                @input="formatearYValidarNota($event, evaluacion)" :id="'notaEvaluacion-' + index"
+                                placeholder="7.0" maxlength="4"
                                 class="form-control text-center nota-input focus-custom" />
                         </div>
 
@@ -48,8 +77,7 @@ function calcularNotaPendiente(evaluacionPendiente) {
                         </div>
 
                         <div :class="[notasStore.ramoActual.promedioSimple ? 'col-6' : 'col-sm-4']">
-                            <label
-                                class="form-label fw-semibold text-white d-none d-sm-block invisible"></label>
+                            <label class="form-label fw-semibold text-white d-none d-sm-block invisible"></label>
                             <button @click="calcularNotaPendiente(evaluacion)"
                                 class="btn btn-block btn-custom-secondary fw-bold w-100">
                                 Pendiente
@@ -67,13 +95,8 @@ function calcularNotaPendiente(evaluacionPendiente) {
 .custom-card {
     width: 100%;
     max-width: 420px;
-<<<<<<< HEAD
     --bs-card-border-width: 1px;
     --bs-card-border-color: #e2e2e2;
-=======
-    --bs-card-border-width: 2px;
-    --bs-card-border-color: #34312D;
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
     --bs-card-border-radius: 12px;
     position: relative;
     transition: all 0.3s ease-in-out;
@@ -89,11 +112,7 @@ function calcularNotaPendiente(evaluacionPendiente) {
 }
 
 .form-control.focus-custom:focus {
-<<<<<<< HEAD
     border-color: #e2e2e2;
-=======
-    border-color: #437057;
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
     box-shadow: 0 0 0 0.25rem rgba(67, 112, 87, 0.2);
 }
 
@@ -114,7 +133,6 @@ input[type="number"] {
 }
 
 .btn-custom-secondary {
-<<<<<<< HEAD
     --bs-btn-border-color: #e2e2e2;
     --bs-btn-bg: #34312D;
     --bs-btn-color: white;
@@ -124,15 +142,5 @@ input[type="number"] {
     line-height: 1.5;
     height: 100%;
     transition: all 0.3s ease-in-out;
-=======
-    --bs-btn-border-color: #0d6efd;
-    --bs-btn-bg: #0d6efd;
-    --bs-btn-color: white;
-    --bs-btn-hover-bg: #34312D;
-    --bs-btn-hover-color: white;
-    --bs-btn-hover-border-color: #34312D;
-    line-height: 1.5;
-    height: 100%;
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 }
 </style>

@@ -13,19 +13,11 @@
 </script>
 
 <template>
-<<<<<<< HEAD
     <div class="p-3 text-center" style="max-width: 250px;">
         
         <h5 class="fw-bold mb-3 text-dark border-bottom pb-2">Editar Ramos</h5>
         
         <div class="d-grid gap-3">
-=======
-    <div class="card p-3 shadow-sm mx-auto text-center" style="max-width: 250px;">
-        
-        <h5 class="fw-bold mb-3 text-dark border-bottom pb-2">Editar Ramos</h5>
-        
-        <div class="d-grid gap-2">
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
             
             <button @click="agregarRamo" 
                     type="button" 
@@ -61,12 +53,7 @@
     .btn-danger-custom:hover {
         background-color: #34312D;
         color: white;
-<<<<<<< HEAD
         border-color: #e2e2e2;
-=======
-        border-color: #34312D;
-        transform: translateY(-1px);
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 </style>

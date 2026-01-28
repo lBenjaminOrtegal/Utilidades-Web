@@ -1,5 +1,4 @@
 <script setup>
-<<<<<<< HEAD
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
@@ -77,54 +76,11 @@ const isActive = (path) => {
 
                 </ul>
             </div>
-=======
-</script>
-
-<template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-5">
-        
-        <a class="navbar-brand fw-bold fs-3 text-dark d-flex align-items-center" href="#">
-            <img src="../../public/iconoUtilidadesWeb.png" alt="Logo" width="50">
-            Utils.Web
-        </a>
-
-        <button 
-            class="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav" 
-            aria-controls="navbarNav" 
-            aria-expanded="false" 
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav gap-3">
-                <li class="nav-item">
-                    <RouterLink class="nav-link fs-5" to="/">Inicio</RouterLink>
-                </li>
-                
-                <li class="nav-item">
-                    <RouterLink class="nav-link fs-5" to="/malla">Malla</RouterLink>
-                </li>
-                
-                <li class="nav-item">
-                    <RouterLink class="nav-link fs-5" to="/notas">Notas</RouterLink>
-                </li>
-                
-                <li class="nav-item">
-                    <RouterLink class="nav-link fs-5" to="/tareas">Tareas</RouterLink>
-                </li>
-            </ul>
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
         </div>
     </nav>
 </template>
 
 <style scoped>
-<<<<<<< HEAD
 .custom-navbar {
     background-color: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -209,9 +165,4 @@ const isActive = (path) => {
         text-align: center;
     }
 }
-=======
-    .nav-link:hover {
-        color: #0d6efd !important;
-    }
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 </style>

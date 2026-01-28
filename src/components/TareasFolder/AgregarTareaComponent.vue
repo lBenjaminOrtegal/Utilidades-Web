@@ -60,27 +60,15 @@ function addTarea() {
 
 <style scoped>
 .btn-success {
-<<<<<<< HEAD
     background-color: #34312D !important;
     border-color: #e2e2e2 !important;
-=======
-    background-color: #226F54 !important;
-    border-color: #226F54 !important;
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-success:hover {
-<<<<<<< HEAD
     background-color: #ffffff !important;
     border-color: #e2e2e2 !important;
     color: #34312D;
-=======
-    background-color: #34312D !important;
-    border-color: #34312D !important;
-    color: white;
-    transform: scale(1.01);
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 }
 
 .form-label {

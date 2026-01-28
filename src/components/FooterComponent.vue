@@ -21,10 +21,6 @@
 
 <style scoped>
     .link-light:hover {
-<<<<<<< HEAD
         color: #c8e1ff !important; 
-=======
-        color: #0d6efd !important; 
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
     }
 </style>

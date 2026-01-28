@@ -34,36 +34,19 @@ import HeaderComponent from '../components/HeaderComponent.vue';
 </template>
 
 <style scoped>
-<<<<<<< HEAD
 .btn-personalizado {
   background-color: #34312D;
   color: white;
   border: 1px solid #e2e2e2;
-=======
-:root {
-  --color-hero-link: #DED1C0;
-  --color-base-dark: #34312D;
-}
-
-.btn-personalizado {
-  background-color: var(--color-hero-link);
-  color: var(--color-base-dark);
-  border: 1px solid var(--color-hero-link);
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
   width: 100%;
   max-width: 200px;
   transition: all 0.2s ease-in-out;
 }
 
 .btn-personalizado:hover {
-<<<<<<< HEAD
   background-color: white;
   color: #34312D;
   border-color: #e2e2e2;
-=======
-  color: white;
-  border-color: var(--color-base-dark);
->>>>>>> 41d4f36c8f56e580d5d458c6b123a417eb15094c
 }
 
 @media (max-width: 767.98px) {
